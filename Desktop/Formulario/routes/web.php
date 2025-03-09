@@ -13,3 +13,8 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 require __DIR__.'/auth.php';
+
+
+Route :: view ( 'form' , 'form' ) 
+-> middleware ( [ 'auth' ] ) 
+-> name ( 'form' ) ;
