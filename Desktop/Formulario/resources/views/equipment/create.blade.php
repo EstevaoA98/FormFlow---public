@@ -6,5 +6,5 @@
     <label for="descricao">Descrição:</label>
     <textarea name="descricao" id="descricao"></textarea>
     <br><br>
-    <button type="submit">Criar Equipamento</button>
+    <button type="submit">Salvar</button>
 </form>
