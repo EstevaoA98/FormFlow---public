@@ -5,7 +5,7 @@
 @section('content')
     <div id="event-create-container" class="col-md-6 offset-md-3">
         <h1 class="text-center">Formulário de inspeção de equipamento</h1>
-        <form id="event-form" action="/events" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('form.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group m-3">
                 <label for="date">Data do teste:</label>
@@ -21,11 +21,13 @@
                     <label for="equipamento_id">Equipamento:</label>
                     <select class="form-control" id="equipamento_id" name="equipamento_id">
                         <option value="">Selecione um equipamento</option>
-                        {{-- 
-                                                @foreach ($equipamentos as $equipamento)
-                                                    <option value=""></option>
-                                                @endforeach
-                        --}}
+                        @if ($equipamentos && $equipamentos->count() > 0)
+                            @foreach ($equipamentos as $equipamento)
+                                <option value="{{ $equipamento->id }}">{{ $equipamento->name }}</option>
+                            @endforeach
+                        @else
+                            <option value="">Nenhum equipamento encontrado</option>
+                        @endif
                     </select>
                 </div>
                 <div class="form-group m-3">
@@ -35,49 +37,49 @@
                             <ion-icon name="alert-circle"></ion-icon> {{ $errors->first('items') }}
                         </p>
                     @endif
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Botões"
                             {{ in_array('Botões', old('items', [])) ? 'checked' : '' }}> Botões
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Display"
                             {{ in_array('Display', old('items', [])) ? 'checked' : '' }}> Display
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Cabo de força"
                             {{ in_array('Cabo de força', old('items', [])) ? 'checked' : '' }}> Cabo de força
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Pedal"
                             {{ in_array('Pedal', old('items', [])) ? 'checked' : '' }}> Pedal
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Micro-motor"
                             {{ in_array('Micro-motor', old('items', [])) ? 'checked' : '' }}> Micro-motor
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Drill"
                             {{ in_array('Drill', old('items', [])) ? 'checked' : '' }}> Drill
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Serra"
                             {{ in_array('Serra', old('items', [])) ? 'checked' : '' }}> Serra
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Conexão"
                             {{ in_array('Conexão', old('items', [])) ? 'checked' : '' }}> Conexão
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Ruido anormal"
                             {{ in_array('Ruido anormal', old('items', [])) ? 'checked' : '' }}> Ruido anormal
                     </div>
-                    <div class="form-grup">
+                    <div class="form-group">
                         <input type="checkbox" name="items[]" value="Aumento de temperatura"
                             {{ in_array('Aumento de temperatura', old('items', [])) ? 'checked' : '' }}> Aumento de
                         temperatura
                     </div>
-                    <div class="form-grup">
-                        <input type="checkbox" name="items[]" value="Poblemas na conexão"
+                    <div class="form-group">
+                        <input type="checkbox" name="items[]" value="Problemas na conexão"
                             {{ in_array('Problemas na conexão', old('items', [])) ? 'checked' : '' }}> Problemas na conexão
                     </div>
                 </div>
