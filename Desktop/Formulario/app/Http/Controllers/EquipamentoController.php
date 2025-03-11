@@ -28,6 +28,6 @@ class EquipamentoController extends Controller
         ]);
 
         // Redireciona para uma página com uma mensagem de sucesso
-        return redirect()->route('equipment.create')->with('success', 'Equipamento criado com sucesso!');
+        return redirect()->route('/')->with('success', 'Equipamento criado com sucesso!');
     }
 }
