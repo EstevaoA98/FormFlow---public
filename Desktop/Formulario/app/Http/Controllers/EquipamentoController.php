@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 
 class EquipamentoController extends Controller
 {
-    
+
     public function create()
     {
-        return view('equipment.create'); 
+        $equipamentos = Equipamento::all();
+        return view('equipment.create', compact('equipamentos'));
     }
 
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
@@ -28,6 +29,7 @@ class EquipamentoController extends Controller
         ]);
 
         // Redireciona para uma página com uma mensagem de sucesso
-        return redirect()->route('/')->with('success', 'Equipamento criado com sucesso!');
+        return redirect('/')->with('success', 'Equipamento criado com sucesso!');
+
     }
 }

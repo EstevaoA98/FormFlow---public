@@ -23,13 +23,12 @@
                         <option value="">Selecione um equipamento</option>
                         @if ($equipamentos && $equipamentos->count() > 0)
                             @foreach ($equipamentos as $equipamento)
-                                <option value="{{ $equipamento->id }}">{{ $equipamento->name }}</option>
+                                <option value="{{ $equipamento->id }}">{{ $equipamento->nome }}</option>
                             @endforeach
                         @else
                             <option value="">Nenhum equipamento encontrado</option>
                         @endif
                     </select>
-                </div>
                 <div class="form-group m-3">
                     <label for="description">Infraestrutura do Evento:</label><br>
                     @if ($errors->has('items'))

@@ -5,7 +5,9 @@ use App\Http\Controllers\EquipamentoController;
 use App\Models\Equipamento;
 use App\Http\Controllers\InspecaoController;
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
