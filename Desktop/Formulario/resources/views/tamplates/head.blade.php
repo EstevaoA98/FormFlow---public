@@ -50,7 +50,7 @@
                     Perfil
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                    <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Sair</a></li>
                   </ul>

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inspecao extends Model
 {
-    use HasFactory;
-
-    protected $fillable = ['date', 'equipamento_id', 'items', 'apto', 'obs', 'image'];
-
+  
+        protected $table = 'inspecoes'; 
+        protected $fillable = ['date', 'equipamento_id', 'items', 'apto', 'obs', 'image'];
+    
     protected $casts = [
         'items' => 'array',
         'apto' => 'boolean',

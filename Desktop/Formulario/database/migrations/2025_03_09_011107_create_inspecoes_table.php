@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inspecoes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('equipamento_id')->constrained()->onDelete('cascade');
-            $table->date('data_teste');
-            $table->boolean('apto');
-            $table->text('obs')->nullable();
-            $table->string('image')->nullable();
-            $table->timestamps();
-        });
+        {
+            Schema::create('inspecoes', function (Blueprint $table) {
+                $table->id();
+                $table->date('date');
+                $table->foreignId('equipamento_id')->constrained();
+                $table->json('items');
+                $table->boolean('apto');
+                $table->text('obs')->nullable();
+                $table->string('image')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
