@@ -9,8 +9,11 @@ class Equipamento extends Model
 {
     use HasFactory;
 
-    protected $table = 'equipamentos'; 
-    protected $fillable = ['nome', 'descricao'];  
+    protected $table = 'equipamentos';
+    protected $fillable = ['nome', 'descricao'];
 
-
+    public function inspecoes()
+    {
+        return $this->hasMany(Inspecao::class);
+    }
 }

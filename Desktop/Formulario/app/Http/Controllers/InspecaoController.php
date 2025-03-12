@@ -40,6 +40,33 @@ class InspecaoController extends Controller
 
         $inspecao->save();
 
-        return redirect()->route('form.create')->with('success', 'Inspeção registrada com sucesso!');
+        return redirect('/')->route('form.create')->with('success', 'Inspeção registrada com sucesso!');
+    }
+
+
+    public function home()
+    {
+        $inspecoes = Inspecao::all();
+
+        // Gerar o HTML ou conteúdo de exibição diretamente no controlador
+        $inspecoesHtml = '';
+        foreach ($inspecoes as $inspecao) {
+            $inspecoesHtml .= "
+                <div>
+                    <h3>Data: {$inspecao->date}</h3>
+                    <p>Equipamento: {$inspecao->equipamento->nome}</p>
+                    <p>Status: " . ($inspecao->apto ? 'Apto' : 'Não Apto') . "</p>
+                    <p>Observações: " . ($inspecao->obs ?: 'Nenhuma') . "</p>
+                </div>
+            ";
+        }
+
+        return view('home', compact('inspecoesHtml'));
+    }
+
+    public function index()
+    {
+        $inspecoes = Inspecao::all(); 
+        return view('welcome', compact('inspecoes')); 
     }
 }

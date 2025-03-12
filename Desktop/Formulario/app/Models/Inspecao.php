@@ -7,13 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inspecao extends Model
 {
-  
-        protected $table = 'inspecoes'; 
-        protected $fillable = ['date', 'equipamento_id', 'items', 'apto', 'obs', 'image'];
+    use HasFactory;
+
+    protected $table = 'inspecoes'; 
+    protected $fillable = ['date', 'equipamento_id', 'items', 'apto', 'obs', 'image'];
     
     protected $casts = [
         'items' => 'array',
         'apto' => 'boolean',
     ];
+
+    public function equipamento()
+    {
+        return $this->belongsTo(Equipamento::class); 
+    }
 }
+
 
