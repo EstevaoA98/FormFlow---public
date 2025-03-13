@@ -20,9 +20,10 @@
                         @endforeach
                     </ul>
                 </p>
-                <p>Imagem:
+                <p>Imagem do equipamento:
+                    <br>
                     @if($inspecao->image)
-                        <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção" />
+                    <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção" width="300" height="200">
                     @else
                         Nenhuma imagem disponível
                     @endif

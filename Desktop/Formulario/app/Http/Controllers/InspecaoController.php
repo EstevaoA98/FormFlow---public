@@ -34,13 +34,14 @@ class InspecaoController extends Controller
         $inspecao->obs = $validatedData['obs'] ?? null;
 
         if ($request->hasFile('image')) {
+            
             $imagePath = $request->file('image')->store('images', 'public');
+
             $inspecao->image = $imagePath;
         }
-
         $inspecao->save();
 
-        return redirect('/')->route('form.create')->with('success', 'Inspeção registrada com sucesso!');
+        return redirect()->route('welcome')->with('success', 'Inspeção registrada com sucesso!');
     }
 
 
