@@ -3,29 +3,32 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1 class="text-center">Inspeções</h1>
+
+<div id="all-form" class="col-md-6 offset-md-3">
+    <h1 class="text-center md-3">Inspeções</h1>
     <div id="all-form" class="col-md-6 offset-md-3">
     @if ($inspecoes->isNotEmpty())
         @foreach ($inspecoes as $inspecao)
             <div>
-                <p>Data: {{ $inspecao->date }}</p>
-                <p>Equipamento ID: {{ $inspecao->equipamento_id }}</p>
-                <p>Equipamento: {{ $inspecao->equipamento->nome }}</p>
-                <p>Status: {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
-                <p>Observações: {{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
-                <p>Itens inspecionados: 
+                <p class="page-number">Página {{ $loop->iteration }}</p>
+                <p><strong>Data de teste:</strong> {{ $inspecao->date }}</p>
+                <p><strong>ID Equipamento:</strong> {{ $inspecao->equipamento_id }}</p>
+                <p><strong>Equipamento: </strong> {{ $inspecao->equipamento->nome }}</p>
+                <p><strong>Status: </strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
+                <p><strong>Observações: </strong>{{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
+                <p><strong>Itens inspecionados: </strong>
                     <ul>
                         @foreach (json_decode($inspecao->items) as $item)
                             <li>{{ $item }}</li>
                         @endforeach
                     </ul>
                 </p>
-                <p>Imagem do equipamento:
+                <p><strong>Imagem do equipamento: </strong>
                     <br>
                     @if($inspecao->image)
                     <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção" width="300" height="200">
                     @else
-                        Nenhuma imagem disponível
+                        <p>Nenhuma imagem disponível</p>
                     @endif
                 </p>
             </div>
@@ -35,4 +38,5 @@
         <p>Nenhuma inspeção encontrada.</p>
     @endif
     </div>
+    
 @endsection
