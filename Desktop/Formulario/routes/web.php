@@ -27,7 +27,6 @@ Route::post('form', [InspecaoController::class, 'store'])
 
 Route::resource('equipment', EquipamentoController::class)->middleware(['auth']);
 
-Route::get('/', [InspecaoController::class, 'index'])->name('welcome');
-
+Route::get('/', [InspecaoController::class, 'index'])->name('inspecoes.index');
 
 require __DIR__ . '/auth.php';

@@ -34,7 +34,7 @@ class InspecaoController extends Controller
         $inspecao->obs = $validatedData['obs'] ?? null;
 
         if ($request->hasFile('image')) {
-            
+
             $imagePath = $request->file('image')->store('images', 'public');
 
             $inspecao->image = $imagePath;
@@ -65,9 +65,19 @@ class InspecaoController extends Controller
         return view('home', compact('inspecoesHtml'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $inspecoes = Inspecao::all(); 
-        return view('welcome', compact('inspecoes')); 
+        $query = $request->input('query');
+
+        if ($query) {
+            
+            $inspecoes = Inspecao::whereHas('equipamento', function ($q) use ($query) {
+                $q->where('nome', 'like', '%' . $query . '%');
+            })->get();
+        } else {
+            $inspecoes = Inspecao::all();
+        }
+
+        return view('welcome', compact('inspecoes'));
     }
 }

@@ -55,43 +55,43 @@
                                 <li><a class="dropdown-item" href="#">Atualizar formulário</a></li>
                             </ul>
                         </li>
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle"role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                          Perfil
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}" 
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                 Logout
-                             </a>
-                             
-                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                 @csrf
-                             </form>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle"role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Perfil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Sair
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     @endauth
                     @guest
-                    <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-                        <a href="/register" class="btn btn-custom p-lg-1">Cadastrar</a>
-                        <a href="/login" class="btn btn-custom p-lg-1">Login</a>
-                    </div>
+                        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+                            <a href="/register" class="btn btn-custom p-lg-1">Cadastrar</a>
+                            <a href="/login" class="btn btn-custom p-lg-1">Login</a>
+                        </div>
                 @endguest
-                </ul>
             </div>
-        </div>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        </div>
+            <div>
+                <form class="d-flex" role="search" action="{{ route('inspecoes.index') }}" method="GET">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Equipamento" aria-label="  Equipamento">
+                    <button class="btn btn-outline-success m-2" type="submit">Buscar</button>
+                </form>
+            </div>
+            
         </div>
     </nav>
 

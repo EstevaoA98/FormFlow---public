@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Equipamento;  
+use App\Models\Inspecao;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
@@ -31,6 +34,7 @@ class FormController extends Controller
         $inspecao->items = json_encode($validatedData['items']);
         $inspecao->apto = $validatedData['apto'];
         $inspecao->obs = $validatedData['obs'];
+        $inspecao->user_id = Auth::id();
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
@@ -41,4 +45,5 @@ class FormController extends Controller
 
         return redirect()->route('form.create')->with('success', 'Formulário enviado com sucesso!');
     }
-}
+
+}   

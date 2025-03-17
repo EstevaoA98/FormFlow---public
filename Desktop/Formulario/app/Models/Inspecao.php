@@ -21,6 +21,6 @@ class Inspecao extends Model
     {
         return $this->belongsTo(Equipamento::class); 
     }
-}
 
+}  
 
