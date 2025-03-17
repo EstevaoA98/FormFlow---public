@@ -1,6 +1,6 @@
 @extends('tamplates.head')
 
-@section('title', 'Home')
+@section('title', 'Dashboard')
 
 @section('content')
 
