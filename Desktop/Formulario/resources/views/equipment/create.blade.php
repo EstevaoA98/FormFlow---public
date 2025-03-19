@@ -1,8 +1,7 @@
-@extends('tamplates.head')
+<x-app-layout>
 
 @section('title', 'Adicionar equipamento')
 
-@section('content')
 <div id="event-create-container" class="col-md-6 offset-md-3">
     <h1 class="text-center">Adicionar equipamento</h1>
 <form action="{{ route('equipment.store') }}" method="POST">
@@ -20,5 +19,5 @@
     </div>
 </form>
 </div>
-@endsection
+</x-app-layout>
     

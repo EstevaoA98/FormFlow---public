@@ -1,4 +1,4 @@
-@extends('tamplates.head')
+<x-app-layout>
 
 @section('title', 'Formulário de inspeção')
 
@@ -108,4 +108,4 @@
         </form>
     </div>
 
-@endsection
+</x-app-layout>

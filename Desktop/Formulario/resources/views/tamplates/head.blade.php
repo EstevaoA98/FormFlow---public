@@ -48,7 +48,7 @@
                                 Formulário de inspeção
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/form">Adicionar formulário</a></li>
+                                <li> /li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

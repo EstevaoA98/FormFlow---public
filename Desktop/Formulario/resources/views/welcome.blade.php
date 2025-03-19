@@ -1,6 +1,6 @@
-@extends('tamplates.head')
+<x-app-layout>
 
-@section('title', 'Dashboard')
+@section('title', 'Home')
 
 @section('content')
 
@@ -39,4 +39,4 @@
     @endif
     </div>
     
-@endsection
+</x-app-layout>
