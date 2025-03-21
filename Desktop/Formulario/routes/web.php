@@ -31,4 +31,11 @@ Route::post('form', [InspecaoController::class, 'store'])
 Route::resource('equipment', EquipamentoController::class)->middleware(['auth']);
 
 Route::get('/', [InspecaoController::class, 'index'])->name('inspecoes.index');
+
+Route::get('/dashboard', [InspecaoController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+Route::get('/inspecoes/{id}/edit', [InspecaoController::class, 'edit'])->name('inspecoes.edit')->middleware('auth');
+
+Route::put('/inspecoes/{id}', [InspecaoController::class, 'update'])->name('inspecoes.update')->middleware('auth');
+
 require __DIR__.'/auth.php';

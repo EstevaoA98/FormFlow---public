@@ -72,7 +72,6 @@ class InspecaoController extends Controller
         $query = $request->input('query');
 
         if ($query) {
-            
             $inspecoes = Inspecao::whereHas('equipamento', function ($q) use ($query) {
                 $q->where('nome', 'like', '%' . $query . '%');
             })->get();
@@ -80,8 +79,9 @@ class InspecaoController extends Controller
             $inspecoes = Inspecao::all();
         }
 
-        return view('welcome', compact('inspecoes'));
+        return view('welcome', ['inspecoes' => $inspecoes]);
     }
+
 
     public function show($id)
     {
@@ -90,4 +90,30 @@ class InspecaoController extends Controller
         return view('show', compact('inspecao'));
     }
 
+    public function edit($id)
+    {
+        $inspecao = Inspecao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        return view('inspecoes.edit', compact('inspecao'));
+    }
+
+    public function dashboard()
+    {
+        $inspecoes = Inspecao::where('user_id', Auth::id())->with('equipamento')->get();
+
+        return view('dashboard', compact('inspecoes'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $inspecao = Inspecao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $inspecao->update([
+            'date' => $request->date,
+            'obs' => $request->obs,
+            'updated_at' => now(), 
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Inspeção atualizada com sucesso!');
+    }
 }

@@ -32,7 +32,9 @@
                     @endif
                 </p>
                 <p><strong>Inspecionado por:</strong> {{ $inspecao->usuario->name ?? 'Desconhecido' }}</p>
-
+                <p><strong>Última atualização:</strong> 
+                    {{ $inspecao->updated_at->gt($inspecao->created_at) ? $inspecao->updated_at->format('d/m/Y H:i') : 'N/A' }}
+                </p>
             </div>
             <hr>
         @endforeach

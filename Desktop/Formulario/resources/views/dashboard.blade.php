@@ -1,19 +1,22 @@
-@section('title', 'Dashboard')
-
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <h1>Minhas Inspeções</h1>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+    @if ($inspecoes->isNotEmpty())
+        @foreach ($inspecoes as $inspecao)
+            <div>
+                <p><strong>Data de teste:</strong> {{ $inspecao->date }}</p>
+                <p><strong>ID Equipamento:</strong> {{ $inspecao->equipamento_id }}</p>
+                <p><strong>Equipamento:</strong> {{ $inspecao->equipamento->nome }}</p>
+                <p><strong>Status:</strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
+                <p><strong>Observações:</strong> {{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
+
+                
+                <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
+
+                <hr>
             </div>
-        </div>
-    </div>
+        @endforeach
+    @else
+        <p>Você ainda não fez nenhuma inspeção.</p>
+    @endif
 </x-app-layout>
