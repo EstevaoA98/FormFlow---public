@@ -111,9 +111,18 @@ class InspecaoController extends Controller
         $inspecao->update([
             'date' => $request->date,
             'obs' => $request->obs,
-            'updated_at' => now(), 
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Inspeção atualizada com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        $inspecao = Inspecao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $inspecao->delete();
+
+        return redirect()->route('inspecoes.index')->with('success', 'Inspeção excluída com sucesso!');
     }
 }

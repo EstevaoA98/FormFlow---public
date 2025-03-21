@@ -38,4 +38,7 @@ Route::get('/inspecoes/{id}/edit', [InspecaoController::class, 'edit'])->name('i
 
 Route::put('/inspecoes/{id}', [InspecaoController::class, 'update'])->name('inspecoes.update')->middleware('auth');
 
+Route::delete('/inspecoes/{id}', [InspecaoController::class, 'destroy'])->name('inspecoes.destroy');
+
+
 require __DIR__.'/auth.php';
