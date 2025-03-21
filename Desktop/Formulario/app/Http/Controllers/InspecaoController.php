@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Inspecao;
 use App\Models\Equipamento;
+use Illuminate\Support\Facades\Auth;
 
 class InspecaoController extends Controller
 {
@@ -32,6 +33,7 @@ class InspecaoController extends Controller
         $inspecao->items = json_encode($validatedData['items'] ?? []);
         $inspecao->apto = $validatedData['apto'];
         $inspecao->obs = $validatedData['obs'] ?? null;
+        $inspecao->user_id = Auth::id();
 
         if ($request->hasFile('image')) {
 
@@ -41,7 +43,7 @@ class InspecaoController extends Controller
         }
         $inspecao->save();
 
-        return redirect()->route('welcome')->with('success', 'Inspeção registrada com sucesso!');
+        return redirect()->route('inspecoes.index')->with('success', 'Inspeção registrada com sucesso!');
     }
 
 
@@ -80,4 +82,12 @@ class InspecaoController extends Controller
 
         return view('welcome', compact('inspecoes'));
     }
+
+    public function show($id)
+    {
+        $inspecao = Inspecao::find($id);
+
+        return view('show', compact('inspecao'));
+    }
+
 }

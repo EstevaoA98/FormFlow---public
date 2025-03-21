@@ -9,9 +9,9 @@ class Inspecao extends Model
 {
     use HasFactory;
 
-    protected $table = 'inspecoes'; 
+    protected $table = 'inspecoes';
     protected $fillable = ['date', 'equipamento_id', 'items', 'apto', 'obs', 'image'];
-    
+
     protected $casts = [
         'items' => 'array',
         'apto' => 'boolean',
@@ -19,8 +19,11 @@ class Inspecao extends Model
 
     public function equipamento()
     {
-        return $this->belongsTo(Equipamento::class); 
+        return $this->belongsTo(Equipamento::class);
     }
 
-}  
-
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}

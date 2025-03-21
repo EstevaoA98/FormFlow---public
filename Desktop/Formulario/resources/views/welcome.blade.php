@@ -31,6 +31,8 @@
                         <p>Nenhuma imagem disponível</p>
                     @endif
                 </p>
+                <p><strong>Inspecionado por:</strong> {{ $inspecao->usuario->name ?? 'Desconhecido' }}</p>
+
             </div>
             <hr>
         @endforeach
