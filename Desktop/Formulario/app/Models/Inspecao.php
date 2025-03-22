@@ -15,6 +15,7 @@ class Inspecao extends Model
     protected $casts = [
         'items' => 'array',
         'apto' => 'boolean',
+        'date' => 'date',
     ];
 
     public function equipamento()

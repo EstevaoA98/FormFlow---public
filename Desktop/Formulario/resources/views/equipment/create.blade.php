@@ -2,8 +2,15 @@
 
 @section('title', 'Adicionar equipamento')
 
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-black leading-tight">
+        {{ __('Adicionar equipamento') }}
+    </h2>
+</x-slot>
+
+<br>
+
 <div id="event-create-container" class="col-md-6 offset-md-3">
-    <h1 class="text-center">Adicionar equipamento</h1>
 <form action="{{ route('equipment.store') }}" method="POST">
     @csrf
     <div class="form-group m-3">

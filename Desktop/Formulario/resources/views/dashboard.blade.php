@@ -1,7 +1,13 @@
 <x-app-layout>
     @section('title', 'Minhas Inspeções')
 
-    <h1 class="col-md-6 offset-md-3">Minhas Inspeções</h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-black leading-tight">
+            {{ __('Minhas Inspeções') }}
+        </h2>
+    </x-slot>
+ 
+    <br>
 
     <div id="all-form" class="col-md-6 offset-md-3">
         @if ($inspecoes->isNotEmpty())
@@ -18,17 +24,17 @@
                             <li>{{ $item }}</li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
-                    @if ($inspecao)
+                    <br>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
+                        
                         <form action="{{ route('inspecoes.destroy', $inspecao->id) }}" method="POST"
                             onsubmit="return confirm('Tem certeza que deseja excluir esta inspeção?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Excluir Inspeção</button>
+                            <button type="submit" class="btn btn-danger">Excluir</button>
                         </form>
-                    @endif
-                    <hr>
-                </div>
+                    </div>
             @endforeach
         @else
             <p>Você ainda não fez nenhuma inspeção.</p>

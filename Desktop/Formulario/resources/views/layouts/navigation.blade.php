@@ -4,30 +4,34 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Navigation Links -->
-                
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('inspecoes.index')" :active="request()->routeIs('inspecoes.index')">
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
                 @auth
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('equipment.create')" :active="request()->routeIs('equipment.create')">
-                        {{ __('Adicionar equipamento') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('form.create')" :active="request()->routeIs('form.create')">
-                        {{ __('Adicionar formulário') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Inspeções') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('equipment.create')" :active="request()->routeIs('equipment.create')">
+                            {{ __('Adicionar equipamento') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('form.create')" :active="request()->routeIs('form.create')">
+                            {{ __('Adicionar formulário') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Inspeções') }}
+                        </x-nav-link>
+                    </div>
                 @endauth
             </div>
+
+            @if (isset($search))
+                {{ $search }}
+            @endif
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -47,7 +51,6 @@
                                 </div>
                             </button>
                         </x-slot>
-
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
@@ -56,7 +59,7 @@
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-dropdown-link href="{{ route('logout') }}" 
+                                <x-dropdown-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     {{ __('Sair') }}
                                 </x-dropdown-link>
@@ -66,11 +69,11 @@
                 @endauth
 
                 @guest
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <a href="/register" class="btn hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">Cadastrar</a>
-                    <a href="/login" class="btn hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">Login</a>
-                </div>
-            @endguest
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <a href="/register" class="btn hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">Cadastrar</a>
+                        <a href="/login" class="btn hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">Login</a>
+                    </div>
+                @endguest
             </div>
 
             <!-- Hamburger -->
