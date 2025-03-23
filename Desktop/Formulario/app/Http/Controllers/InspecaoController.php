@@ -101,6 +101,7 @@ class InspecaoController extends Controller
         $inspecoes = Inspecao::where('user_id', Auth::id())->with('equipamento')->get();
 
         return view('dashboard', compact('inspecoes'));
+        
     }
 
     public function update(Request $request, $id)

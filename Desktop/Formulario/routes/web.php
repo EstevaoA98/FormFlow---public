@@ -42,5 +42,12 @@ Route::put('/inspecoes/{id}', [InspecaoController::class, 'update'])->name('insp
 
 Route::delete('/inspecoes/{id}', [InspecaoController::class, 'destroy'])->name('inspecoes.destroy');
 
+Route::get('/equipment', [EquipamentoController::class, 'index'])->name('equipment.index');
+
+Route::get('/equipment/{equipamento}/edit', [EquipamentoController::class, 'edit'])->name('equipment.edit');
+
+Route::put('/equipment/{equipamento}', [EquipamentoController::class, 'update'])->name('equipment.update');
+
+Route::delete('/equipment/{equipamento}', [EquipamentoController::class, 'destroy'])->name('equipment.destroy');
 
 require __DIR__.'/auth.php';

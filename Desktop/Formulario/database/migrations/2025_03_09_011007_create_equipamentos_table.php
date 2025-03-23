@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->text('descricao')->nullable();
+            $table->string('marca')->nullable();
+            $table->string('status')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('modelo')->nullable();
+            $table->string('numero_serie')->nullable();
+            $table->string('TestEletrico')->nullable();
+            $table->string('TestCalibracao')->nullable();
             $table->timestamps();
         });
     }

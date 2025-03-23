@@ -26,6 +26,11 @@
                             {{ __('Inspeções') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('equipment.index')" :active="request()->routeIs('equipment.index')">
+                            {{ __('Equipamentos') }}
+                        </x-nav-link>
+                    </div>
                 @endauth
             </div>
 
