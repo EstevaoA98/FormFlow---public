@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('tipo')->nullable();
             $table->string('modelo')->nullable();
             $table->string('numero_serie')->nullable();
-            $table->string('TestEletrico')->nullable();
-            $table->string('TestCalibracao')->nullable();
+            $table->date('TestEletrico')->nullable();
+            $table->date('TestCalibracao')->nullable();
             $table->timestamps();
         });
     }

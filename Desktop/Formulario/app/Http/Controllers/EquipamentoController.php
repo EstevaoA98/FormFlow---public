@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipamento;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EquipamentoController extends Controller
 {
@@ -16,40 +17,60 @@ class EquipamentoController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
-            'marca' => 'nullable|string',
-            'modelo' => 'nullable|string',
-            'numero_serie' => 'nullable|string',
-            'TestEletrico' => 'nullable|string',
-            'TestCalibracao' => 'nullable|string',
+            'marca' => 'nullable|string|max:255',
+            'status' => 'required|string',
+            'tipo' => 'nullable|string|max:255',
+            'modelo' => 'nullable|string|max:255',
+            'numero_serie' => 'nullable|string|max:255',
+            'TestEletrico' => 'nullable|date',
+            'TestCalibracao' => 'nullable|date',
         ]);
 
-        Equipamento::create([
-            'nome' => $request->input('nome'),
-            'descricao' => $request->input('descricao'),
-            'marca' => $request->input('marca'),
-            'modelo' => $request->input('modelo'),
-            'numero_serie' => $request->input('numero_serie'),
-            'TestEletrico' => $request->input('TestEletrico'),
-            'TestCalibracao' => $request->input('TestCalibracao'),
-        ]);
+        $equipamento = new Equipamento();
+        $equipamento->nome = $request->nome;
+        $equipamento->descricao = $request->descricao;
+        $equipamento->marca = $request->marca;
+        $equipamento->status = $request->status;
+        $equipamento->tipo = $request->tipo;
+        $equipamento->modelo = $request->modelo;
+        $equipamento->numero_serie = $request->numero_serie;
+        $equipamento->TestEletrico = $request->TestEletrico;
+        $equipamento->TestCalibracao = $request->TestCalibracao;
+        $equipamento->save();
 
-        return redirect('/')->with('success', 'Equipamento criado com sucesso!');
-
+        return redirect()->route('equipment.index')->with('success', 'Equipamento criado com sucesso!');
     }
+
 
     public function index()
     {
-        $equipamentos = Equipamento::all(); 
+        $equipamentos = Equipamento::all();
+
+        foreach ($equipamentos as $equipamento) { // Verifica se os testes está vencendo (dentro de 7 dias)
+
+            $equipamento->testeletrico_vencendo = $this->isVencendo($equipamento->TestEletrico);
+
+            $equipamento->testcalibracao_vencendo = $this->isVencendo($equipamento->TestCalibracao);
+        }
+
         return view('equipment.index', compact('equipamentos'));
     }
 
+    private function isVencendo($data)
+    {
+        $data_vencimento = Carbon::parse($data); 
+        $hoje = Carbon::now(); 
+
+        return $data_vencimento->isBefore($hoje) || $data_vencimento->diffInDays($hoje) <= 7;
+    }
+
+
     public function edit($id)
     {
-        $equipamento = Equipamento::findOrFail($id); 
+        $equipamento = Equipamento::findOrFail($id);
         return view('equipment.edit', compact('equipamento'));
     }
 

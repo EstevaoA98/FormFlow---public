@@ -10,7 +10,7 @@
 
     <br>
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="create-container" class="col-md-6 offset-md-3">
         <form action="{{ route('form.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group m-3">
