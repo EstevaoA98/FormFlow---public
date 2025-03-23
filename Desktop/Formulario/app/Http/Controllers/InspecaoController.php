@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Inspecao;
 use App\Models\Equipamento;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 class InspecaoController extends Controller
 {
     public function create()
@@ -51,7 +51,6 @@ class InspecaoController extends Controller
     {
         $inspecoes = Inspecao::all();
 
-        // Gerar o HTML ou conteúdo de exibição diretamente no controlador
         $inspecoesHtml = '';
         foreach ($inspecoes as $inspecao) {
             $inspecoesHtml .= "
@@ -108,10 +107,23 @@ class InspecaoController extends Controller
     {
         $inspecao = Inspecao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
+        if ($request->hasFile('image')) {
+
+            if ($inspecao->image && Storage::disk('public')->exists($inspecao->image)) {
+                Storage::disk('public')->delete($inspecao->image);
+            }
+
+            $path = $request->file('image')->store('imagens', 'public');
+            $inspecao->image = $path;
+        }
+
         $inspecao->update([
             'date' => $request->date,
             'obs' => $request->obs,
             'updated_at' => now(),
+            'itens' => json_encode($request->itens),
+            'apto' => $request->apto,
+            'image' => $inspecao->image ?? $inspecao->getOriginal('image')
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Inspeção atualizada com sucesso!');

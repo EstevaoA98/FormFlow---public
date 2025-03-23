@@ -16,6 +16,8 @@ class Inspecao extends Model
         'items' => 'array',
         'apto' => 'boolean',
         'date' => 'date',
+        'obs' => 'string',
+        'image' => 'string',
     ];
 
     public function equipamento()

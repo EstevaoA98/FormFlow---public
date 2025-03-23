@@ -35,8 +35,7 @@
                                 @foreach (json_decode($inspecao->items) as $item)
                                     <li>{{ $item }}</li>
                                 @endforeach
-                            </ul>
-                            </p>
+                            </ul></p>
                             <p><strong>Inspecionado por:</strong> {{ $inspecao->usuario->name ?? 'Desconhecido' }}</p>
                             <p><strong>Última atualização:</strong>
                                 {{ $inspecao->updated_at->gt($inspecao->created_at) ? $inspecao->updated_at->format('d/m/Y H:i') : 'N/A' }}

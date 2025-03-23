@@ -10,19 +10,19 @@
 
 <br>
 
-<div id="event-create-container" class="col-md-6 offset-md-3">
+<div id="create-container" class="form-control" >
 <form action="{{ route('equipment.store') }}" method="POST">
     @csrf
     <div class="form-group m-3">
     <label for="nome">Nome:</label>
-    <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome do equipamento" required>
+    <input type="text" name="nome" class="form-control text-center" id="nome" placeholder="Nome do equipamento" required>
     </div>
     <div class="form-group m-3">
     <label for="descricao">Descrição:</label>
-    <textarea name="descricao" class="form-control" id="descricao" placeholder="Descrição / Número de serie"></textarea>
+    <textarea name="descricao" class="form-control text-center" id="descricao" placeholder="Descrição / Número de serie"></textarea>
     </div>
     <div class="form-group text-center m-3">
-        <button type="submit" class="btn btn-custom" value="Salvar equipamento">Salvar</button>
+        <button type="submit" class="btn btn-primary mt-4" value="Salvar equipamento">Salvar</button>
     </div>
 </form>
 </div>

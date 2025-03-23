@@ -6,14 +6,14 @@
             {{ __('Minhas Inspeções') }}
         </h2>
     </x-slot>
- 
+
     <br>
 
     <div id="all-form" class="col-md-6 offset-md-3">
         @if ($inspecoes->isNotEmpty())
             @foreach ($inspecoes as $inspecao)
-                <div>
-                    <p><strong>Data de teste:</strong> {{ $inspecao->date }}</p>
+                <div class="form-control mt-3">
+                    <p><strong>Data de teste:</strong> {{ $inspecao->date->format('d/m/Y') }}</p>
                     <p><strong>ID Equipamento:</strong> {{ $inspecao->equipamento_id }}</p>
                     <p><strong>Equipamento:</strong> {{ $inspecao->equipamento->nome }}</p>
                     <p><strong>Status:</strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
@@ -25,9 +25,24 @@
                         @endforeach
                     </ul>
                     <br>
-                    <div class="d-flex gap-2">
+                    <p><strong>Última atualização:</strong>
+                        {{ $inspecao->updated_at->gt($inspecao->created_at) ? $inspecao->updated_at->format('d/m/Y') : 'N/A' }}
+                    </p>
+                    <p><strong>Observações: </strong>{{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
+                    <p><strong>Status: </strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
+
+                    <div class="inspection-image">
+                        <strong>Imagem do equipamento:</strong>
+                        @if ($inspecao->image)
+                            <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção"
+                                width="300" height="200">
+                        @else
+                            <p>Nenhuma imagem disponível</p>
+                        @endif
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
                         <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
-                        
+
                         <form action="{{ route('inspecoes.destroy', $inspecao->id) }}" method="POST"
                             onsubmit="return confirm('Tem certeza que deseja excluir esta inspeção?');">
                             @csrf
@@ -35,8 +50,11 @@
                             <button type="submit" class="btn btn-danger">Excluir</button>
                         </form>
                     </div>
+                </div>
             @endforeach
         @else
             <p>Você ainda não fez nenhuma inspeção.</p>
         @endif
+    </div>
+
 </x-app-layout>

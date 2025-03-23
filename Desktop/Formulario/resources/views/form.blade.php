@@ -33,7 +33,7 @@
                         @endif
                     </select>
                     <div class="form-group m-3">
-                        <label for="description">Infraestrutura do Evento:</label><br>
+                        <label for="description">Itens inspecionados:</label><br>
                         @if ($errors->has('items'))
                             <p class="alert alert-danger">
                                 <ion-icon name="alert-circle"></ion-icon> {{ $errors->first('items') }}
@@ -88,13 +88,13 @@
                     </div>
                     <div class="form-group m-3">
                         <label for="apto">Equipamento apto pra uso?</label>
-                        <select class="form-select" id="apto" name="apto" aria-label="Disabled select example">
+                        <select class="form-control" id="apto" name="apto" aria-label="Disabled select example">
                             <option value="0" {{ old('apto') == '0' ? 'selected' : '' }}>Não</option>
                             <option value="1" {{ old('apto') == '1' ? 'selected' : '' }}>Sim</option>
                         </select>
                     </div>
                     <div class="form-group m-3">
-                        <label for="location">Observação:</label>
+                        <label for="observacao">Observação:</label>
                         <textarea class="form-control" id="obs" name="obs" placeholder="Observação a ser pontuada...">{{ old('obs') }}</textarea>
                     </div>
                     <div class="form-group m-3">
@@ -107,7 +107,7 @@
                         @endif
                     </div>
                     <div class="form-group text-center m-3">
-                        <button type="submit" class="btn btn-custom" value="Criar evento">Criar Evento</button>
+                        <button type="submit" class="btn btn-primary mt-4" value="Criar evento">Criar Evento</button>
                     </div>
         </form>
     </div>
