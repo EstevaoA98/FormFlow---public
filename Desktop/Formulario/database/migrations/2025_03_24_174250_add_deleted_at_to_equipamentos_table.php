@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('itens_inspecionados', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('inspecao_id')->constrained('inspecoes')->onDelete('cascade');
-            $table->string('item');
-            $table->timestamps();
+        Schema::table('equipamentos', function (Blueprint $table) {
+            $table->softDeletes();  
         });
     }
 
@@ -24,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('itens_inspecionados');
-
-        
+        Schema::table('equipamentos', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 };

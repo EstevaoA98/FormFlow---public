@@ -48,6 +48,10 @@ Route::get('/equipment/{equipamento}/edit', [EquipamentoController::class, 'edit
 
 Route::put('/equipment/{equipamento}', [EquipamentoController::class, 'update'])->name('equipment.update');
 
-Route::delete('/equipment/{equipamento}', [EquipamentoController::class, 'destroy'])->name('equipment.destroy');
+Route::get('/equipment/hidden', [EquipamentoController::class, 'hidden'])->name('equipment.hidden');
+
+Route::put('/equipment/{id}/restore', [EquipamentoController::class, 'restore'])->name('equipment.restore');
+
+Route::delete('/equipment/{id}/forceDelete', [EquipamentoController::class, 'forceDelete'])->name('equipment.forceDelete');
 
 require __DIR__.'/auth.php';

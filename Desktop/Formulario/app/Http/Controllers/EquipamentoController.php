@@ -123,4 +123,40 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipment.index')->with('success', 'Equipamento atualizado com sucesso!');
     }
+
+    public function destroy($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+
+        if ($equipamento->inspecao()->exists()) {
+            return redirect()->route('equipment.index')->with('error', 'Este equipamento está associado a uma inspeção e não pode ser excluído!');
+        }
+
+        $equipamento->delete();
+
+        return redirect()->route('equipment.index')->with('success', 'Equipamento excluído com sucesso!');
+    }
+
+    public function show()
+    {
+        $equipamentos = Equipamento::onlyTrashed()->get();
+
+        return view('equipment.hidden', compact('equipamentos'));
+    }
+
+    public function restore($id)
+    {
+        $equipamento = Equipamento::withTrashed()->findOrFail($id);
+        $equipamento->restore();
+
+        return redirect()->route('equipment.index')->with('success', 'Equipamento restaurado com sucesso!');
+    }
+
+    public function forceDelete($id)
+    {
+        $equipamento = Equipamento::withTrashed()->findOrFail($id);
+        $equipamento->forceDelete();
+
+        return redirect()->route('equipment.hidden')->with('success', 'Equipamento excluído permanentemente!');
+    }
 }
