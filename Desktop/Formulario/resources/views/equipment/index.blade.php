@@ -8,6 +8,14 @@
     </x-slot>
 
     <div class="container mt-5">
+        <!-- Botões de Filtro -->
+        <div class="mb-3">
+            <button class="btn btn-primary filter-btn" data-filter="all">Todos</button>
+            <button class="btn btn-warning filter-btn" data-filter="a-vencer">A vencer</button>
+            <button class="btn btn-danger filter-btn" data-filter="vencidos">Vencidos</button>
+        </div>
+
+        <!-- Tabela -->
         <table class="table table-bordered table-striped rounded">
             <thead>
                 <tr>
@@ -21,13 +29,16 @@
                     <th>Número de Série</th>
                     <th>Teste Elétrico</th>
                     <th>Teste de Calibração</th>
-                    <th>Data de cadastro</th>
-                    <th>Ações</th>
+                    <th>Data de Cadastro</th>
+                    @auth
+                       <th>Ações</th> 
+                    @endauth
+                    
                 </tr>
             </thead>
             <tbody>
                 @foreach ($equipamentos as $equipamento)
-                    <tr>
+                    <tr class="{{ $equipamento->classeFiltro }}">
                         <td>{{ $equipamento->id }}</td>
                         <td>{{ $equipamento->nome }}</td>
                         <td>{{ $equipamento->descricao }}</td>
@@ -37,38 +48,59 @@
                         <td>{{ $equipamento->modelo }}</td>
                         <td>{{ $equipamento->numero_serie }}</td>
                         <td>
-                                    <span 
-                                        @php
-                                            $testeEletricoVencido = \Carbon\Carbon::parse($equipamento->TestEletrico)->isPast();
-                                        @endphp
-                                        style="color: {{ $testeEletricoVencido ? 'red' : 'black' }};"
-                                    >
-                                        {{ $equipamento->TestEletrico ? \Carbon\Carbon::parse($equipamento->TestEletrico)->format('d/m/Y') : 'Não informado' }}
-                                    </span>
-                            </td>
+                            <span
+                                style="color: {{ $equipamento->testeEletricoVencido ? 'red' : ($equipamento->testeEletricoAVencer ? 'orange' : 'black') }};">
+                                {{ $equipamento->dataTesteEletrico }}
+                            </span>
+                        </td>
                         <td>
-                                    <span 
-                                        @php
-                                            $testCalibracaoVencido = \Carbon\Carbon::parse($equipamento->TestCalibracao)->isPast();
-                                        @endphp
-                                        style="color: {{ $testCalibracaoVencido ? 'red' : 'black' }};"
-                                    >
-                                        {{ $equipamento->TestCalibracao ? \Carbon\Carbon::parse($equipamento->TestCalibracao)->format('d/m/Y') : 'Não informado' }}
-                                    </span>
+                            <span
+                                style="color: {{ $equipamento->testCalibracaoVencido ? 'red' : ($equipamento->testCalibracaoAVencer ? 'orange' : 'black') }};">
+                                {{ $equipamento->dataTesteCalibracao }}
+                            </span>
                         </td>
                         <td>{{ $equipamento->created_at->format('d/m/Y') }}</td>
-                        <td>
-                            <a href="{{ route('equipment.edit', $equipamento->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                            <form action="{{ route('equipment.destroy', $equipamento->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este equipamento?')">Excluir</button>
-                            </form>
-                        </td>
+                        @auth
+                            <td>
+                                <a href="{{ route('equipment.edit', $equipamento->id) }}"
+                                    class="btn btn-warning btn-sm">Editar</a>
+                                <form action="{{ route('equipment.destroy', $equipamento->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Tem certeza que deseja excluir este equipamento?')">Excluir</button>
+                                </form>
+                            </td>
+                        @endauth
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+
+    <!-- Script para Filtragem -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttons = document.querySelectorAll(".filter-btn");
+            const rows = document.querySelectorAll("tbody tr");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const filter = this.getAttribute("data-filter");
+
+                    rows.forEach(row => {
+                        if (filter === "all") {
+                            row.style.display = "";
+                        } else if (row.classList.contains(filter)) {
+                            row.style.display = "";
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 
 </x-app-layout>

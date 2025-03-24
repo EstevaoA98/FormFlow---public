@@ -9,7 +9,12 @@
                     <x-nav-link :href="route('inspecoes.index')" :active="request()->routeIs('inspecoes.index')">
                         {{ __('Home') }}
                     </x-nav-link>
-                </div>
+                </div>                    
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('equipment.index')" :active="request()->routeIs('equipment.index')">
+                            {{ __('Equipamentos') }}
+                        </x-nav-link>
+                    </div>
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('equipment.create')" :active="request()->routeIs('equipment.create')">
@@ -23,14 +28,10 @@
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Inspeções') }}
+                            {{ __('Minhas inspeções') }}
                         </x-nav-link>
                     </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('equipment.index')" :active="request()->routeIs('equipment.index')">
-                            {{ __('Equipamentos') }}
-                        </x-nav-link>
-                    </div>
+
                 @endauth
             </div>
 

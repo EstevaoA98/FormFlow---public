@@ -49,12 +49,35 @@ class EquipamentoController extends Controller
     {
         $equipamentos = Equipamento::all();
 
-        foreach ($equipamentos as $equipamento) { // Verifica se os testes está vencendo (dentro de 7 dias)
+        $hoje = Carbon::today();
+        $equipamentos = Equipamento::all()->map(function ($equipamento) use ($hoje) {
 
-            $equipamento->testeletrico_vencendo = $this->isVencendo($equipamento->TestEletrico);
+            $dataTesteEletrico = $equipamento->TestEletrico ? Carbon::parse($equipamento->TestEletrico) : null;
+            $dataTesteCalibracao = $equipamento->TestCalibracao ? Carbon::parse($equipamento->TestCalibracao) : null;
+    
+            $testeEletricoVencido = $dataTesteEletrico && $dataTesteEletrico->isPast();
+            $testCalibracaoVencido = $dataTesteCalibracao && $dataTesteCalibracao->isPast();
+    
+            $testeEletricoAVencer = $dataTesteEletrico && !$testeEletricoVencido && $dataTesteEletrico->diffInDays($hoje) <= 30;
+            $testCalibracaoAVencer = $dataTesteCalibracao && !$testCalibracaoVencido && $dataTesteCalibracao->diffInDays($hoje) <= 30;
+    
+            $classeFiltro = "";
+            if ($testeEletricoVencido || $testCalibracaoVencido) {
+                $classeFiltro = "vencidos";
+            } elseif ($testeEletricoAVencer || $testCalibracaoAVencer) {
+                $classeFiltro = "a-vencer";
+            }
 
-            $equipamento->testcalibracao_vencendo = $this->isVencendo($equipamento->TestCalibracao);
-        }
+            $equipamento->dataTesteEletrico = $dataTesteEletrico ? $dataTesteEletrico->format('d/m/Y') : 'Não informado';
+            $equipamento->dataTesteCalibracao = $dataTesteCalibracao ? $dataTesteCalibracao->format('d/m/Y') : 'Não informado';
+            $equipamento->testeEletricoVencido = $testeEletricoVencido;
+            $equipamento->testCalibracaoVencido = $testCalibracaoVencido;
+            $equipamento->testeEletricoAVencer = $testeEletricoAVencer;
+            $equipamento->testCalibracaoAVencer = $testCalibracaoAVencer;
+            $equipamento->classeFiltro = $classeFiltro;
+    
+            return $equipamento;
+        });
 
         return view('equipment.index', compact('equipamentos'));
     }
