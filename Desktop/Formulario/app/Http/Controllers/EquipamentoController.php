@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Equipamento;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EquipamentoController extends Controller
 {
@@ -44,30 +46,43 @@ class EquipamentoController extends Controller
         return redirect()->route('equipment.index')->with('success', 'Equipamento criado com sucesso!');
     }
 
-
-    public function index()
+    public function index(Request $request)
     {
-        $equipamentos = Equipamento::all();
-
         $hoje = Carbon::today();
-        $equipamentos = Equipamento::all()->map(function ($equipamento) use ($hoje) {
+        $search = trim(strtolower($request->input('search')));
 
+        $equipamentos = Equipamento::query();
+
+        if (!empty($search)) {
+            $equipamentos->where(function ($query) use ($search) {
+                $query->whereRaw('LOWER(nome) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(descricao) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(marca) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(status) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(tipo) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(modelo) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(numero_serie) LIKE ?', ["%{$search}%"]);
+            });
+        }
+
+        $equipamentos = $equipamentos->get();
+
+        $equipamentos = $equipamentos->map(function ($equipamento) use ($hoje) {
             $dataTesteEletrico = $equipamento->TestEletrico ? Carbon::parse($equipamento->TestEletrico) : null;
             $dataTesteCalibracao = $equipamento->TestCalibracao ? Carbon::parse($equipamento->TestCalibracao) : null;
-    
+
             $testeEletricoVencido = $dataTesteEletrico && $dataTesteEletrico->isPast();
             $testCalibracaoVencido = $dataTesteCalibracao && $dataTesteCalibracao->isPast();
-    
+
             $testeEletricoAVencer = $dataTesteEletrico && !$testeEletricoVencido && $dataTesteEletrico->diffInDays($hoje) <= 30;
             $testCalibracaoAVencer = $dataTesteCalibracao && !$testCalibracaoVencido && $dataTesteCalibracao->diffInDays($hoje) <= 30;
-    
-            $classeFiltro = "";
+
+            $classeFiltro = "all";
             if ($testeEletricoVencido || $testCalibracaoVencido) {
                 $classeFiltro = "vencidos";
             } elseif ($testeEletricoAVencer || $testCalibracaoAVencer) {
                 $classeFiltro = "a-vencer";
             }
-
             $equipamento->dataTesteEletrico = $dataTesteEletrico ? $dataTesteEletrico->format('d/m/Y') : 'Não informado';
             $equipamento->dataTesteCalibracao = $dataTesteCalibracao ? $dataTesteCalibracao->format('d/m/Y') : 'Não informado';
             $equipamento->testeEletricoVencido = $testeEletricoVencido;
@@ -75,19 +90,11 @@ class EquipamentoController extends Controller
             $equipamento->testeEletricoAVencer = $testeEletricoAVencer;
             $equipamento->testCalibracaoAVencer = $testCalibracaoAVencer;
             $equipamento->classeFiltro = $classeFiltro;
-    
+
             return $equipamento;
         });
 
-        return view('equipment.index', compact('equipamentos'));
-    }
-
-    private function isVencendo($data)
-    {
-        $data_vencimento = Carbon::parse($data); 
-        $hoje = Carbon::now(); 
-
-        return $data_vencimento->isBefore($hoje) || $data_vencimento->diffInDays($hoje) <= 7;
+        return view('equipment.index', compact('equipamentos', 'search'));
     }
 
 
@@ -100,6 +107,7 @@ class EquipamentoController extends Controller
     public function update(Request $request, $id)
     {
         $equipamento = Equipamento::findOrFail($id);
+
 
         $equipamento->update([
             'nome' => $request->nome,

@@ -8,6 +8,15 @@
     </x-slot>
 
     <div class="container mt-5">
+
+        <form method="GET" role="filter" action="{{ route('equipment.index') }}" class="d-flex m-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..." style="border-radius: 15px;" value="{{ request('search') }}">
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
+                >Buscar</button>
+            </div>
+        </form>
+
         <!-- Botões de Filtro -->
         <div class="mb-3">
             <button class="btn btn-primary filter-btn" data-filter="all">Todos</button>
