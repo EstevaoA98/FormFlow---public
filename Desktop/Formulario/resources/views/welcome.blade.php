@@ -7,13 +7,11 @@
             {{ __('Todas Inspeções') }}
         </h2>
 
-            <form class="d-flex m-3" role="search" action="{{ route('inspecoes.index') }}" method="GET">
-                <input class="form-control me-2" type="search" name="query" placeholder="Equipamento"
+        <form class="d-flex m-3" role="search" action="{{ route('inspecoes.index') }}" method="GET">
+            <input class="form-control me-2" type="search" name="query" placeholder="Equipamento"
                 aria-label="Equipamento" style="border-radius: 15px;">
-                <button
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-                    type="submit">Buscar</button>
-            </form>
+            <button class="btn btn-secondary rounded-pill px-3" type="submit">Buscar</button>
+        </form>
 
     </x-slot>
 
@@ -25,17 +23,18 @@
                 @foreach ($inspecoes as $inspecao)
                     <div class="col-md-3">
                         <div class="inspection-card">
-                            <p class="page-number">Página {{ $loop->iteration }}</p>                            
+                            <p class="page-number">Página {{ $loop->iteration }}</p>
                             <p><strong>Equipamento: </strong> {{ $inspecao->equipamento->nome }}</p>
                             <p><strong>ID Equipamento:</strong> {{ $inspecao->equipamento_id }}</p>
-                            <p><strong>Data de teste:</strong> {{ $inspecao->date ->format('d/m/Y') }}</p>
+                            <p><strong>Data de teste:</strong> {{ $inspecao->date->format('d/m/Y') }}</p>
                             <p><strong>Observações: </strong>{{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
                             <p><strong>Itens inspecionados: </strong>
                             <ul>
                                 @foreach (json_decode($inspecao->items) as $item)
                                     <li>{{ $item }}</li>
                                 @endforeach
-                            </ul></p>
+                            </ul>
+                            </p>
                             <p><strong>Inspecionado por:</strong> {{ $inspecao->usuario->name ?? 'Desconhecido' }}</p>
                             <p><strong>Última atualização:</strong>
                                 {{ $inspecao->updated_at->gt($inspecao->created_at) ? $inspecao->updated_at->format('d/m/Y H:i') : 'N/A' }}

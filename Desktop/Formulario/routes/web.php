@@ -40,18 +40,18 @@ Route::get('/inspecoes/{id}/edit', [InspecaoController::class, 'edit'])->name('i
 
 Route::put('/inspecoes/{id}', [InspecaoController::class, 'update'])->name('inspecoes.update')->middleware('auth');
 
-Route::delete('/inspecoes/{id}', [InspecaoController::class, 'destroy'])->name('inspecoes.destroy');
+Route::delete('/inspecoes/{id}', [InspecaoController::class, 'destroy'])->name('inspecoes.destroy')->middleware('auth');
 
-Route::get('/equipment', [EquipamentoController::class, 'index'])->name('equipment.index');
+Route::get('/equipment', [EquipamentoController::class, 'index'])->name('equipment.index')->middleware('auth');
 
-Route::get('/equipment/{equipamento}/edit', [EquipamentoController::class, 'edit'])->name('equipment.edit');
+Route::get('/equipment/{equipamento}/edit', [EquipamentoController::class, 'edit'])->name('equipment.edit')->middleware('auth');
 
-Route::put('/equipment/{equipamento}', [EquipamentoController::class, 'update'])->name('equipment.update');
+Route::put('/equipment/{equipamento}', [EquipamentoController::class, 'update'])->name('equipment.update')->middleware('auth');
 
-Route::get('/equipment/hidden', [EquipamentoController::class, 'hidden'])->name('equipment.hidden');
+Route::get('/equipment/hidden', [EquipamentoController::class, 'hidden'])->name('equipment.hidden')->middleware('auth');
 
-Route::put('/equipment/{id}/restore', [EquipamentoController::class, 'restore'])->name('equipment.restore');
+Route::put('/equipment/{id}/restore', [EquipamentoController::class, 'restore'])->name('equipment.restore')->middleware('auth');
 
-Route::delete('/equipment/{id}/forceDelete', [EquipamentoController::class, 'forceDelete'])->name('equipment.forceDelete');
+Route::delete('/equipment/{id}/forceDelete', [EquipamentoController::class, 'forceDelete'])->name('equipment.forceDelete')->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -14,17 +14,18 @@
                 <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..."
                     style="border-radius: 15px;" value="{{ request('search') }}">
                 <button type="submit"
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">Buscar</button>
+                    class="btn btn-secondary rounded-pill px-3">Buscar</button>
             </div>
         </form>
 
         <!-- Botões de Filtro -->
-        <div class="mb-3">
-            <button class="btn btn-primary filter-btn" data-filter="all">Todos</button>
-            <button class="btn btn-warning filter-btn" data-filter="a-vencer">A vencer</button>
-            <button class="btn btn-danger filter-btn" data-filter="vencidos">Vencidos</button>
-        
-            <a href="{{ route('equipment.hidden') }}" class="btn btn-primary">
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+            <div>
+                <button class="btn btn-primary rounded-pill px-3" data-filter="all">Todos</button>
+                <button class="btn btn-warning rounded-pill px-3" data-filter="a-vencer">A vencer</button>
+                <button class="btn btn-danger rounded-pill px-3" data-filter="vencidos">Vencidos</button>
+            </div>
+            <a href="{{ route('equipment.hidden') }}" class="btn btn-secondary rounded-pill px-3">
                 Recuperar equipamentos
             </a>
         </div>
