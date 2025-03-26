@@ -40,9 +40,9 @@
                             <p>Nenhuma imagem disponível</p>
                         @endif
                     </div>
-                    <div class="d-flex gap-2 mt-3">
+                    <div class="d-flex gap-2 mt-3 justify-content-center">
                         <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
-
+                    
                         <form action="{{ route('inspecoes.destroy', $inspecao->id) }}" method="POST"
                             onsubmit="return confirm('Tem certeza que deseja excluir esta inspeção?');">
                             @csrf

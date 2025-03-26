@@ -7,7 +7,9 @@
         </h2>
     </x-slot>
 
-    <div class="container mt-5">
+    <a href="{{ url('equipment') }}" class="btn btn-secondary mt-3" style="position: static; margin-left: 30px;"> ← </a>
+    
+    <div class="container mt-3">
 
         <table class="table table-bordered table-striped rounded mt-4">
             <thead>

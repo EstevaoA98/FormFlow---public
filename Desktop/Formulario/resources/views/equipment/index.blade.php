@@ -6,7 +6,6 @@
             {{ __('Lista de Equipamentos') }}
         </h2>
     </x-slot>
-
     <div class="container mt-5">
 
         <form method="GET" role="filter" action="{{ route('equipment.index') }}" class="d-flex m-3">
