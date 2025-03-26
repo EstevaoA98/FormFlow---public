@@ -5,6 +5,14 @@
         <h2 class="font-semibold text-xl text-black leading-tight">
             {{ __('Equipamentos Recuperáveis') }}
         </h2>
+        <form method="GET" role="filter" action="{{ route('equipment.index') }}" class="d-flex m-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..."
+                    style="border-radius: 15px;" value="{{ request('search') }}">
+                <button type="submit"
+                    class="btn btn-secondary rounded-pill px-3">Buscar</button>
+            </div>
+        </form>
     </x-slot>
 
     <a href="{{ url('equipment') }}" class="btn btn-secondary mt-3" style="position: static; margin-left: 30px;"> ← </a>

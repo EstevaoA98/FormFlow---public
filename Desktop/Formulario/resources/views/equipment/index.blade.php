@@ -4,10 +4,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black leading-tight">
             {{ __('Lista de Equipamentos') }}
-        </h2>
-    </x-slot>
-    <div class="container mt-5">
-
+        </h2> 
         <form method="GET" role="filter" action="{{ route('equipment.index') }}" class="d-flex m-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..."
@@ -16,7 +13,8 @@
                     class="btn btn-secondary rounded-pill px-3">Buscar</button>
             </div>
         </form>
-
+    </x-slot>
+    <div class="container mt-5">
         <!-- Botões de Filtro -->
         <div class="mb-3 d-flex justify-content-between align-items-center">
             <div>
