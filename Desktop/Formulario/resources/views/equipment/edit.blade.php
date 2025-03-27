@@ -54,7 +54,9 @@
 
             <div class="form-group m-3">
 
-            <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </div>
         </form>
     </div>
 

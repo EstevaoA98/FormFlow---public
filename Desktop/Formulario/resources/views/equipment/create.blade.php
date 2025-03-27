@@ -52,8 +52,8 @@
                 <input type="date" name="TestCalibracao" class="form-control rounded" id="TestCalibracao">
             </div>
 
-            <div class="form-group m-3">
-                <button type="submit" class="btn btn-primary mt-4">Salvar</button>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </form>
     </div>
