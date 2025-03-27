@@ -12,7 +12,7 @@ class Equipamento extends Model
     use HasFactory,SoftDeletes; 
 
     protected $fillable = [
-        'nome', 'descricao', 'marca', 'status', 'tipo', 'modelo', 'numero_serie', 'dataTesteEletrico', 'dataTesteCalibracao', 'deleted_at'
+        'nome', 'descricao', 'marca', 'status', 'tipo', 'modelo', 'numero_serie', 'TestEletrico', 'TestCalibracao', 'dataTesteEletrico', 'dataTesteCalibracao', 'deleted_at'
     ];
 
     public function inspecao()

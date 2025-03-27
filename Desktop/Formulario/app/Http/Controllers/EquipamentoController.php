@@ -108,7 +108,6 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-
         $equipamento->update([
             'nome' => $request->nome,
             'tipo' => $request->tipo,
@@ -126,6 +125,7 @@ class EquipamentoController extends Controller
 
     public function destroy($id)
     {
+
         $equipamento = Equipamento::findOrFail($id);
 
         if ($equipamento->inspecao()->exists()) {

@@ -44,9 +44,9 @@ Route::delete('/inspecoes/{id}', [InspecaoController::class, 'destroy'])->name('
 
 Route::get('/equipment', [EquipamentoController::class, 'index'])->name('equipment.index')->middleware('auth');
 
-Route::get('/equipment/{equipamento}/edit', [EquipamentoController::class, 'edit'])->name('equipment.edit')->middleware('auth');
+Route::get('/equipment/{id}/edit', [EquipamentoController::class, 'edit'])->name('equipment.edit')->middleware('auth');
 
-Route::put('/equipment/{equipamento}', [EquipamentoController::class, 'update'])->name('equipment.update')->middleware('auth');
+Route::put('/equipment/{id}', [EquipamentoController::class, 'update'])->name('equipment.update')->middleware('auth');
 
 Route::get('/equipment/hidden', [EquipamentoController::class, 'hidden'])->name('equipment.hidden')->middleware('auth');
 
