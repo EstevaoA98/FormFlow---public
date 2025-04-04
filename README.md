@@ -1,117 +1,73 @@
-# Form Flow – Sistema de Formulários de Inspeção
+# 📌 Form Flow
 
-O **Form Flow** é um sistema web desenvolvido em Laravel para facilitar o processo de inspeção de motores. Antes, esse processo era realizado manualmente, utilizando formulários em papel, o que dificultava a organização e rastreabilidade das informações. 
+Sistema de formulários de inspeção para motores, desenvolvido em **Laravel**.
 
-Com o **Form Flow**, é possível:
-- Acompanhar prazos de inspeção
-- Reduzir falhas no controle de qualidade
-- Manter um histórico digital seguro e automatizado
+## 🚀 Instalação e Configuração
 
-## Tecnologias utilizadas
-- **Laravel (PHP)**
-- **Laravel Breeze** (autenticação)
-- **MySQL**
-- **Bootstrap**
+### **Pré-requisitos**
+Antes de iniciar, certifique-se de ter instalado:
+- [PHP](https://www.php.net/downloads.php) (>= 8.1)
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/) e [npm](https://www.npmjs.com/)
+- [MySQL](https://www.mysql.com/) ou outro banco de dados compatível
+- [Laravel](https://laravel.com/)
 
-## Funcionalidades principais
-- Autenticação com controle de acesso (via Laravel Breeze)
-- Cadastro de equipamentos com laudos técnicos e datas de vencimento
-- Datas com cores dinâmicas para facilitar a visualização:
-  - **Vermelho**: vencido
-  - **Laranja**: a vencer
-  - **Preto**: dentro do prazo
-- Filtros: "A vencer", "Vencidos" e "Todos"
-- Edição restrita a usuários autenticados
-- Equipamentos vinculados a formulários não podem ser excluídos (são ocultados)
-- Criação e edição de formulários com registro de autor e data de alteração
-
-## Melhorias futuras
-- Permissões por cargo (administrador, inspetor, operador)
-- Notificações de vencimento por e-mail
-- Geração de relatórios em PDF/Excel
-
-O **Form Flow** está em constante aprimoramento para tornar o processo de inspeção mais eficiente, confiável e organizado.
-
-🔗 **Projeto disponível no GitHub – open source:**
-https://lnkd.in/dhwjfc87
-
----
-
-# Configuração do Form Flow
-
-## Requisitos
-Antes de começar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
-- **PHP 8+**
-- **Composer**
-- **MySQL**
-- **Node.js e npm** (para compilar os assets do frontend)
-- **Laravel instalado globalmente** (opcional)
-
-## Passos para instalação
-
-### 1. Clonar o repositório
-Abra o terminal e execute:
-```sh
-git clone https://github.com/EstevaoA98/FormFlow---public
-cd formflow
+### **1️⃣ Clonando o repositório**
+```bash
+git clone https://github.com/seu-usuario/form-flow.git
+cd form-flow
 ```
 
-### 2. Instalar dependências do Laravel
-```sh
+### **2️⃣ Instalando dependências**
+```bash
 composer install
+npm install
 ```
 
-### 3. Criar e configurar o arquivo `.env`
-```sh
+### **3️⃣ Configuração do ambiente**
+Crie um arquivo **.env** com base no exemplo fornecido:
+```bash
 cp .env.example .env
 ```
-Abra o arquivo `.env` e edite os detalhes do banco de dados:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=formflow
-DB_USERNAME=root
-DB_PASSWORD=seu_password
-```
+Agora, configure o **banco de dados** e outras variáveis no `.env`.
 
-### 4. Gerar a chave da aplicação
-```sh
+### **4️⃣ Gerando chave e migrando banco**
+```bash
 php artisan key:generate
+php artisan migrate --seed
 ```
+O comando `--seed` cria alguns dados iniciais no banco.
 
-### 5. Criar as tabelas no banco de dados
-```sh
-php artisan migrate
-```
-
-### 6. Instalar e configurar o Laravel Breeze (autenticação)
-```sh
-composer require laravel/breeze --dev
-php artisan breeze:install
-npm install && npm run dev
-php artisan migrate
-```
-
-### 7. Iniciar o servidor local
-```sh
+### **5️⃣ Iniciando o servidor**
+```bash
 php artisan serve
 ```
-O sistema estará acessível no navegador em: `http://127.0.0.1:8000`
+O projeto estará disponível em **http://127.0.0.1:8000**
 
-## Comandos úteis
-- Criar um novo usuário administrador (via Laravel Tinker):
-```sh
-php artisan tinker
-```
-```php
-User::create(['name' => 'Admin', 'email' => 'admin@email.com', 'password' => bcrypt('senha123')]);
-```
-- Resetar o banco de dados e popular com dados iniciais:
-```sh
-php artisan migrate:fresh --seed
-```
+## 📜 Funcionalidades
+✅ Autenticação com Laravel Breeze  
+✅ Gestão de equipamentos e laudos técnicos  
+✅ Filtros de equipamentos: "A vencer", "Vencido" e "Todos"  
+✅ Histórico de edições nos formulários  
+✅ Formulários visíveis para usuários autenticados e anônimos  
 
----
+## ⚙️ Comandos úteis
+- Rodar as migrations:
+  ```bash
+  php artisan migrate
+  ```
+- Criar um novo usuário admin (se necessário):
+  ```bash
+  php artisan tinker
+  ```
+  ```php
+  \App\Models\User::create([
+      'name' => 'Admin',
+      'email' => 'admin@example.com',
+      'password' => bcrypt('senha123'),
+      'is_admin' => true
+  ]);
+  ```
 
-Agora o **Form Flow** está pronto para uso! 🚀
+## 📜 Licença
+Este projeto está licenciado sob a **MIT License**.
