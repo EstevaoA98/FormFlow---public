@@ -14,8 +14,8 @@ Antes de iniciar, certifique-se de ter instalado:
 
 ### **1️⃣ Clonando o repositório**
 ```bash
-git clone https://github.com/seu-usuario/form-flow.git
-cd form-flow
+git clone https://github.com/seu-usuario/FormFlow---public
+cd FormFlow---public
 ```
 
 ### **2️⃣ Instalando dependências**
