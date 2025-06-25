@@ -97,17 +97,8 @@
                         <label for="observacao">Observação:</label>
                         <textarea class="form-control" id="obs" name="obs" placeholder="Observação a ser pontuada...">{{ old('obs') }}</textarea>
                     </div>
-                    <div class="form-group m-3">
-                        <label for="image">Foto ou video do equipamento:</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                        @if ($errors->has('image'))
-                            <p class="alert alert-danger">
-                                <ion-icon name="alert-circle"></ion-icon> {{ $errors->first('image') }}
-                            </p>
-                        @endif
-                    </div>
                     <div class="form-group text-center m-3">
-                        <button type="submit" class="btn btn-primary mt-4" value="Criar evento">Criar Evento</button>
+                        <button type="submit" class="btn btn-primary mt-4" value="Criar formulario">Criar Formulário</button>
                     </div>
         </form>
     </div>

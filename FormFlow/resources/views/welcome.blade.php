@@ -42,15 +42,7 @@
                             <p><strong>Observações: </strong>{{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
                             <p><strong>Status: </strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
 
-                            <div class="inspection-image">
-                                <strong>Imagem do equipamento:</strong>
-                                @if ($inspecao->image)
-                                    <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção"
-                                        width="300" height="200">
-                                @else
-                                    <p>Nenhuma imagem disponível</p>
-                                @endif
-                            </div>
+            
                         </div>
                     </div>
                 @endforeach

@@ -55,3 +55,5 @@ Route::put('/equipment/{id}/restore', [EquipamentoController::class, 'restore'])
 Route::delete('/equipment/{id}/forceDelete', [EquipamentoController::class, 'forceDelete'])->name('equipment.forceDelete')->middleware('auth');
 
 require __DIR__.'/auth.php';
+
+Route::get('/exportar-equipamentos', [EquipamentoController::class, 'export'])->name('equipamentos.export');

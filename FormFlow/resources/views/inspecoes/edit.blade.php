@@ -57,19 +57,6 @@
                 </select>
             </div>
 
-            <div class="form-group m-3">
-                <label for="image">Foto ou vídeo do equipamento:</label>
-                
-                @if ($inspecao->image) 
-                    <div class="mb-3">
-                        <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem do Equipamento" class="img-fluid rounded" width="200">
-                    </div>
-                @endif
-            
-                <input type="file" class="form-control rounded-input" id="image" name="image">
-            </div>
-            
-
             <button type="submit" class="btn btn-primary mt-4">Salvar Alterações</button>
         </form>
     </div>

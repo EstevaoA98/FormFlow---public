@@ -24,7 +24,6 @@ class InspecaoController extends Controller
             'items' => 'nullable|array',
             'apto' => 'required|boolean',
             'obs' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $inspecao = new Inspecao();
@@ -35,12 +34,7 @@ class InspecaoController extends Controller
         $inspecao->obs = $validatedData['obs'] ?? null;
         $inspecao->user_id = Auth::id();
 
-        if ($request->hasFile('image')) {
 
-            $imagePath = $request->file('image')->store('images', 'public');
-
-            $inspecao->image = $imagePath;
-        }
         $inspecao->save();
 
         return redirect()->route('inspecoes.index')->with('success', 'Inspeção registrada com sucesso!');
@@ -107,16 +101,6 @@ class InspecaoController extends Controller
     public function update(Request $request, $id)
     {
         $inspecao = Inspecao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-
-        if ($request->hasFile('image')) {
-
-            if ($inspecao->image && Storage::disk('public')->exists($inspecao->image)) {
-                Storage::disk('public')->delete($inspecao->image);
-            }
-
-            $path = $request->file('image')->store('imagens', 'public');
-            $inspecao->image = $path;
-        }
 
         $inspecao->update([
             'date' => $request->date,

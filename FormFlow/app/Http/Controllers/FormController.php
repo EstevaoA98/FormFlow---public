@@ -25,7 +25,6 @@ class FormController extends Controller
             'items' => 'nullable|array', 
             'apto' => 'required|boolean',
             'obs' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', 
         ]);
 
         $inspecao = new \App\Models\Inspecao;
@@ -35,11 +34,6 @@ class FormController extends Controller
         $inspecao->apto = $validatedData['apto'];
         $inspecao->obs = $validatedData['obs'];
         $inspecao->user_id = Auth::id();
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $inspecao->image = $imagePath;
-        }
 
         $inspecao->save();
 

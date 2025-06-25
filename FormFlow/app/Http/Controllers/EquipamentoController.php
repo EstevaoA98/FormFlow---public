@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\EquipamentosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EquipamentoController extends Controller
 {
@@ -158,5 +160,10 @@ class EquipamentoController extends Controller
         $equipamento->forceDelete();
 
         return redirect()->route('equipment.hidden')->with('success', 'Equipamento excluído permanentemente!');
+    }
+
+    public function export()
+    {
+        return Excel::download(new EquipamentosExport, 'equipamentos.xlsx');
     }
 }

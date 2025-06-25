@@ -4,13 +4,12 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-black leading-tight">
             {{ __('Lista de Equipamentos') }}
-        </h2> 
+        </h2>
         <form method="GET" role="filter" action="{{ route('equipment.index') }}" class="d-flex m-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..."
                     style="border-radius: 15px;" value="{{ request('search') }}">
-                <button type="submit"
-                    class="btn btn-secondary rounded-pill px-3">Buscar</button>
+                <button type="submit" class="btn btn-secondary rounded-pill px-3">Buscar</button>
             </div>
         </form>
     </x-slot>
@@ -21,7 +20,12 @@
                 <button class="btn btn-primary rounded-pill px-3" data-filter="all">Todos</button>
                 <button class="btn btn-warning rounded-pill px-3" data-filter="a-vencer">A vencer</button>
                 <button class="btn btn-danger rounded-pill px-3" data-filter="vencidos">Vencidos</button>
+
+
             </div>
+            <a href="{{ route('equipamentos.export') }}" class="btn btn-success rounded-pill px-3">
+                Exportar Equipamentos
+            </a>
             <a href="{{ route('equipment.hidden') }}" class="btn btn-secondary rounded-pill px-3">
                 Recuperar equipamentos
             </a>

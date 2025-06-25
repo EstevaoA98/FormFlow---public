@@ -8,7 +8,7 @@
     </x-slot>
 
     <br>
-
+        
     <div id="all-form" class="col-md-6 offset-md-3">
         @if ($inspecoes->isNotEmpty())
             @foreach ($inspecoes as $inspecao)
@@ -31,14 +31,6 @@
                     <p><strong>Observações: </strong>{{ $inspecao->obs ?? 'Nenhuma observação' }}</p>
                     <p><strong>Status: </strong> {{ $inspecao->apto ? 'Apto' : 'Não Apto' }}</p>
 
-                    <div class="inspection-image">
-                        <strong>Imagem do equipamento:</strong>
-                        @if ($inspecao->image)
-                            <img src="{{ asset('storage/' . $inspecao->image) }}" alt="Imagem da inspeção"
-                                width="300" height="200">
-                        @else
-                            <p>Nenhuma imagem disponível</p>
-                        @endif
                     </div>
                     <div class="d-flex gap-2 mt-3 justify-content-center">
                         <a href="{{ route('inspecoes.edit', $inspecao->id) }}" class="btn btn-primary">Editar</a>
