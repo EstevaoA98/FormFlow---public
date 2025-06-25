@@ -1,0 +1,41 @@
+# Laravel
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/.idea
+/.vscode
+/.env
+/.env.local
+/.env.*.local
+Homestead.yaml
+Homestead.json
+npm-debug.log
+yarn-error.log
+*.log
+*.cache
+
+# Laravel Mix
+/public/mix-manifest.json
+/public/css
+/public/js
+
+# Laravel Vite (build files)
+public/build
+
+# MacOS
+.DS_Store
+
+# PHPStorm / JetBrains
+.idea/
+
+# Composer
+composer.lock
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Optional: Ignore compiled view files
+/storage/framework/views/*.php
